@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="or">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
+    <meta name="description" content="ଓଡ଼ିଆ ବର୍ଣ୍ଣନାତ୍ମକ ଲେଖା ଅଭ୍ୟାସ - କ୍ଲାସ 5 ରୁ 8 ପିଲାମାନଙ୍କ ପାଇଁ 25 ଟି ବିଷୟ, ପ୍ରତ୍ୟେକ ପାଇଁ 10 ଟି ମୂଳ ଶବ୍ଦ, ଭଏସ୍ ରେକର୍ଡିଂ, ଏବଂ ମଡେଲ୍ ଉତ୍ତର।">
+    <meta name="theme-color" content="#4f46e5">
+    <title>ଓଡ଼ିଆ ବର୍ଣ୍ଣନା ଲେଖା - ସ୍ୱର ଅଭ୍ୟାସ | Class 5-8</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background: linear-gradient(145deg, #f3f4f6 0%, #eef2ff 100%);
+            font-family: 'Segoe UI', 'Noto Sans Oriya', 'Kalinga', 'Utkal', system-ui, -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
+            padding: 1rem;
+            min-height: 100vh;
+            color: #1f2937;
+        }
+
+        /* Odia font support */
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Oriya:wght@400;500;600;700&display=swap');
+        
+        .odia-text, button, .topic-title, .keyword-label, .model-line {
+            font-family: 'Noto Sans Oriya', 'Kalinga', 'Segoe UI', sans-serif;
+        }
+
+        .app-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(0px);
+            border-radius: 2rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.5);
+        }
+
+        .header {
+            background: #4f46e5;
+            padding: 1.5rem 1.2rem;
+            color: white;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            letter-spacing: -0.3px;
+            margin-bottom: 0.25rem;
+        }
+
+        .header p {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        .topic-selector {
+            padding: 1rem 1.2rem;
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        select {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            font-size: 1rem;
+            font-weight: 500;
+            border-radius: 2rem;
+            border: 1px solid #cbd5e1;
+            background: #fef9e3;
+            font-family: inherit;
+            color: #1e293b;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        select:focus {
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 3px rgba(79,70,229,0.2);
+        }
+
+        .progress-section {
+            background: #f8fafc;
+            padding: 0.7rem 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .badge {
+            background: #4f46e5;
+            color: white;
+            padding: 0.2rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+        }
+
+        .keywords-grid {
+            padding: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-height: 55vh;
+            overflow-y: auto;
+        }
+
+        .keyword-card {
+            background: white;
+            border-radius: 1.8rem;
+            padding: 0.8rem 1rem;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            transition: all 0.2s;
+            border: 1px solid #eef2ff;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.7rem;
+        }
+
+        .keyword-info {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            flex: 2;
+            min-width: 120px;
+        }
+
+        .keyword-number {
+            background: #e0e7ff;
+            color: #4f46e5;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 60px;
+            font-weight: bold;
+        }
+
+        .keyword-label {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #0f172a;
+            word-break: break-word;
+        }
+
+        .audio-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .btn-icon {
+            background: #f1f5f9;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            cursor: pointer;
+            transition: 0.2s;
+            font-family: inherit;
+        }
+
+        .btn-record {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+        .btn-record.recording-active {
+            background: #ef4444;
+            color: white;
+            animation: pulse 1s infinite;
+        }
+        .btn-stop {
+            background: #e2e3e5;
+            color: #334155;
+        }
+        .btn-play {
+            background: #dcfce7;
+            color: #15803d;
+        }
+        .btn-play:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 20px;
+            background: #cbd5e1;
+            display: inline-block;
+        }
+        .status-dot.recorded {
+            background: #22c55e;
+            box-shadow: 0 0 0 2px #bbf7d0;
+        }
+
+        .showme-section {
+            padding: 1rem 1.2rem 1.5rem;
+            background: white;
+            border-top: 2px dashed #cbd5e1;
+        }
+
+        .btn-show {
+            width: 100%;
+            background: #f97316;
+            color: white;
+            font-size: 1.3rem;
+            font-weight: bold;
+            padding: 1rem;
+            border: none;
+            border-radius: 3rem;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-bottom: 1rem;
+            font-family: inherit;
+            box-shadow: 0 6px 0 #c2410c;
+            transform: translateY(-2px);
+        }
+        .btn-show:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #c2410c;
+        }
+
+        .model-lines {
+            background: #fffbeb;
+            border-radius: 1.5rem;
+            padding: 1.2rem;
+            border-left: 8px solid #f97316;
+        }
+
+        .model-title {
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 0.7rem;
+            color: #9a3412;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .lines-container {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .lines-container li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #ffe4c4;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .footer-note {
+            text-align: center;
+            font-size: 0.7rem;
+            padding: 0.8rem;
+            color: #475569;
+            background: #f1f5f9;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.6; }
+            100% { opacity: 1; }
+        }
+
+        @media (max-width: 550px) {
+            .keyword-card {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .audio-actions {
+                justify-content: flex-start;
+            }
+            .btn-icon {
+                padding: 0.5rem 0.9rem;
+            }
+            .header h1 {
+                font-size: 1.5rem;
+            }
+        }
+        .permission-warning {
+            background: #fff3cd;
+            color: #856404;
+            padding: 0.6rem;
+            border-radius: 1rem;
+            margin: 0.5rem 1rem;
+            font-size: 0.8rem;
+            text-align: center;
+        }
+        button:disabled {
+            opacity: 0.5;
+            cursor: default;
+        }
+    </style>
+</head>
+<body>
+<div class="app-container">
+    <div class="header">
+        <h1>📖 ଓଡ଼ିଆ ବର୍ଣ୍ଣନା ଲେଖା</h1>
+        <p>କ୍ଲାସ 5-8 | 25 ଟି ବିଷୟ | ମୂଳ ଶବ୍ଦ ରେକର୍ଡିଂ | ମଡେଲ୍ ଉତ୍ତର</p>
+    </div>
+
+    <div class="topic-selector">
+        <label for="topicSelect" style="font-weight:600; margin-right:0.5rem;">📌 ବିଷୟ ବାଛନ୍ତୁ : </label>
+        <select id="topicSelect"></select>
+    </div>
+
+    <div class="progress-section">
+        <span>🎙️ ପ୍ରଗତି : <span id="recordedCount">0</span> / <span id="totalKeywords">10</span> ଶବ୍ଦ ରେକର୍ଡ ହୋଇଛି</span>
+        <span class="badge">ସମ୍ପୂର୍ଣ୍ଣ କରି "ଦେଖାଅ" ଦବାନ୍ତୁ</span>
+    </div>
+
+    <div id="keywordsContainer" class="keywords-grid">
+        <!-- dynamic keyword cards -->
+        <div style="text-align:center; padding:2rem;">ପ୍ରସ୍ତୁତ କରାଯାଉଛି...</div>
+    </div>
+
+    <div class="showme-section">
+        <button id="showMeBtn" class="btn-show">✨ ଦେଖାଅ (Show Me) ✨</button>
+        <div id="modelDisplayArea" class="model-lines" style="display: none;">
+            <div class="model-title">📝 ଆମର ନମୁନା ୧୦ ଧାଡ଼ି :</div>
+            <ul id="modelLinesList" class="lines-container"></ul>
+        </div>
+    </div>
+    <div class="footer-note">🔊 ପ୍ରତ୍ୟେକ ମୂଳ ଶବ୍ଦ ପାଇଁ ରେକର୍ଡ କରନ୍ତୁ → ସମ୍ପୂର୍ଣ୍ଣ ହେଲେ 'ଦେଖାଅ' କ୍ଲିକ୍ କରନ୍ତୁ | ଅଭ୍ୟାସ ଜାରି ରଖନ୍ତୁ!</div>
+</div>
+
+<script>
+    // ----------------------------- 25 TOPICS with 10 KEYWORDS & 10 MODEL LINES (ODIA) -------------------------
+    // Comprehensive data for class 5-8 descriptive writing practice
+    const topicsData = [
+        { id:0, name:"ମୋ ବିଦ୍ୟାଳୟ", keywords:["ପାଠଶାଳା","ଶ୍ରେଣୀକୋଠରୀ","ଶିକ୍ଷକ","ପୁସ୍ତକ","ଛୁଟିବେଳ","ଝଣ୍ଡା","ପ୍ରାର୍ଥନା","ବନ୍ଧୁ","ଖେଳପଡ଼ିଆ","ସଭାଘର"], modelLines:["ମୋ ବିଦ୍ୟାଳୟର ନାଁ 'ସରସ୍ୱତୀ ଶିଶୁ ମନ୍ଦିର'।","ଏଠାରେ ବଡ଼ ଧାଡ଼ିରେ ଗଛଲଟା ଅଛି।","ପ୍ରତିଦିନ ସକାଳେ ପ୍ରାର୍ଥନା ହୁଏ।","ଆମ ଶ୍ରେଣୀକୋଠରୀ ପରିଷ୍କାର ଓ ସୁନ୍ଦର।","ଶିକ୍ଷକମାନେ ବହୁତ ସ୍ନେହ କରନ୍ତି।","ପାଠ ପଢ଼ିବା ସହିତ ଖେଳ ମଧ୍ୟ ହୁଏ।","ବାର୍ଷିକ ଉତ୍ସବରେ ସମସ୍ତେ ଭାଗ ନିଅନ୍ତି।","ପୁସ୍ତକାଳୟରେ ଅନେକ ବହି ଅଛି।","ବିଦ୍ୟାଳୟ ମୋର ଦ୍ୱିତୀୟ ଘର ସମାନ।","ମୁଁ ମୋ ବିଦ୍ୟାଳୟକୁ ବହୁତ ଭଲ ପାଏ।"] },
+        { id:1, name:"ମୋ ପରିବାର", keywords:["ବାପା","ମାଆ","ଭାଇ","ଭଉଣୀ","ଜେଜେବାପା","ଜେଜେମାଆ","ଖୁସି","ଭାତ","ସାଥ","ସେବା"], modelLines:["ମୋ ପରିବାରରେ ୫ ଜଣ ସଦସ୍ୟ ଅଛନ୍ତି।","ବାପା ଜଣେ ଶିକ୍ଷକ, ସେ ବହୁତ ମେହେନ୍ତି।","ମାଆ ଗୃହିଣୀ, ସେ ଖୁବ୍ ଯତ୍ନ ନିଅନ୍ତି।","ମୋ ବଡ଼ ଭାଇ ମୋତେ ପାଠରେ ସାହାଯ୍ୟ କରେ।","ସବୁବେଳେ ରାତିରେ ଏକାଠି ଭାତ ଖାଉ।","ଜେଜେବାପା ଗପ କୁହନ୍ତି, ଖୁବ୍ ମଜା।","ଛୁଟିଦିନେ ବଗିଚାରେ ସମୟ ବିତାଉ।","ପରିବାର ମୋର ସବୁଠୁ ବଡ଼ ଧନ।","ଏମାନଙ୍କ ସ୍ନେହ ପାଇଁ ମୁଁ କୃତଜ୍ଞ।","ସମସ୍ତେ ମିଶି ରହିବା ପରିବାରର ମର୍ଯ୍ୟାଦା।"] },
+        { id:2, name:"ବର୍ଷା ଋତୁ", keywords:["ବର୍ଷା","ମେଘ","ପବନ","ଚମକ","ଗର୍ଜନ","ମୟୂର","ବେଙ୍ଗ","ହରିତ","ପୋଖରୀ","ଶୀତଳ"], modelLines:["ଆଷାଢ଼ ମାସରେ ବର୍ଷା ଆସେ।","ଆକାଶରେ କଳା ମେଘ ଘୋଟିଯାଏ।","ଚମକ ଓ ଗର୍ଜନରେ ଭୂମି କମ୍ପେ।","ଝିପିଝିପି ବର୍ଷାରେ ମାଟି ସୁଗନ୍ଧ ବହେ।","ମୟୂର ପଙ୍ଖ ଖୋଲି ନାଚେ।","ବେଙ୍ଗ ରାତିସାରା ଡାକେ।","ଗଛପତ୍ର ସବୁଜ ଦେଖାଯାଏ।","ପିଲାମାନେ କାଗଜ ଡଙ୍ଗା ଭସାନ୍ତି।","ବର୍ଷା ପରେ ଇନ୍ଦ୍ରଧନୁ ଦେଖାଯାଏ।","ବର୍ଷା ଋତୁ ପ୍ରକୃତିକୁ ତରକାରୀ କରେ।"] },
+        { id:3, name:"ଏକ ସୁନ୍ଦର ବଗିଚା", keywords:["ଫୁଲ","ଗୋଲାପ","ଜବା","ଗନ୍ଧ","ପ୍ରଜାପତି","ମହୁମାଛି","ସବୁଜ","ପାଣି","ସୂର୍ଯ୍ୟ","ସଜାଣି"], modelLines:["ମୋ ଘର ପଛପଟେ ଏକ ରଙ୍ଗୀନ ବଗିଚା ଅଛି।","ସେଥିରେ ଗୋଲାପ, ଜବା, ଗେଣ୍ଡୁ ଫୁଲ ଫୁଟେ।","ସକାଳେ ଫୁଲ ଉପରେ ଶିଶିର ବିନ୍ଦୁ ଦିଶେ।","ପ୍ରଜାପତି ଓ ମହୁମାଛି ଗୁଞ୍ଜରିତ ହୁଅନ୍ତି।","ବଗିଚାର ମଝିରେ ଝରଣା ତିଆରି କରାଯାଇଛି।","ସବୁଜ ଘାସ ଉପରେ ପାଦ ଦେଲେ ଅନୁଭବ ମିଳେ।","ମୁଁ ପ୍ରତିଦିନ ସନ୍ଧ୍ୟାରେ ବଗିଚାକୁ ପାଣି ଦିଏ।","ସେଠାରେ ଏକ ଦୋଳି ମଧ୍ୟ ଅଛି।","ବଗିଚା ମୋ ମନକୁ ଶାନ୍ତି ଦିଏ।","ପ୍ରକୃତିର ସୌନ୍ଦର୍ଯ୍ୟ ବଗିଚାରୁ ଜଣାଯାଏ।"] },
+        { id:4, name:"ସମୁଦ୍ର ଯାତ୍ରା", keywords:["ସମୁଦ୍ର","ଢେଉ","ବାଲି","ନୌକା","ଜାହାଜ","ମାଛ","ଶଙ୍ଖ","ଲଙ୍କା","ସୂର୍ଯ୍ୟାସ୍ତ","ପର୍ଯ୍ୟଟକ"], modelLines:["ଗତ ଗ୍ରୀଷ୍ମରେ ପୁରୀ ସମୁଦ୍ର ଦେଖିବାକୁ ଗଲି।","ସମୁଦ୍ରର ଲହରୀ ବଡ଼ ବଡ଼ ହୋଇ ଆସୁଥିଲା।","ଧଳା ବାଲି ଉପରେ ବସି ଥିଲୁ।","ଦୂରରେ ଧୀବରମାନେ ନୌକା ଚଳାଉଥିଲେ।","ସମୁଦ୍ରର କୂଳେ ଶଙ୍ଖ ଓ ଛୋଟ କଙ୍କଡ଼ା ମିଳିଲା।","ସୂର୍ଯ୍ୟ ଡୁବିବା ବେଳେ ଆକାଶ ନାରଙ୍ଗୀ ହୋଇଗଲା।","ଜଳର ଶବ୍ଦ ମନକୁ ଆନନ୍ଦିତ କଲା।","ପର୍ଯ୍ୟଟକଙ୍କ କୋଳାହଳ ଥିଲା।","ସମୁଦ୍ର ଅସୀମ ଭଳି ଲାଗୁଥିଲା।","ମୁଁ ସମୁଦ୍ର ଦେଖି ବହୁତ ଖୁସି ହେଲି।"] },
+        { id:5, name:"ଦୀପାବଳୀ", keywords:["ଦୀପ","ଲକ୍ଷ୍ମୀ","ପଟକା","ମିଠାଇ","ନୂଆ ଲୁଗା","ସଜାଣି","ଆଳତି","ରଙ୍ଗୋଲି","ଖୁସି","ପୂଜା"], modelLines:["ଦୀପାବଳୀ ଆଲୋକର ପର୍ବ।","ଘରଦ୍ୱାର ପରିଷ୍କାର କରି ସଜାଉ।","ସନ୍ଧ୍ୟାରେ ଦୀପ ଜାଳି ଲକ୍ଷ୍ମୀ ପୂଜା କରାଯାଏ।","ଆକାଶରେ ପଟକା ଫୁଟେ।","ନୂଆ ଲୁଗା ପିନ୍ଧି ସମସ୍ତେ ଖୁସି ହୁଅନ୍ତି।","ମିଠାଇ ବଣ୍ଟନ ହୁଏ।","ଘରର ଦ୍ୱାରରେ ରଙ୍ଗୋଲି ତିଆରି ହୁଏ।","ଏହି ପର୍ବ ଅନ୍ଧାରକୁ ଦୂର କରେ।","ସମସ୍ତେ ଭାଇଭାଇ ଭାବରେ ମିଳନ୍ତି।","ଦୀପାବଳୀ ମୋର ପ୍ରିୟ ପର୍ବ।"] },
+        { id:6, name:"ଗ୍ରୀଷ୍ମ ଛୁଟି", keywords:["ରୋଦ","ଗରମ","ଆମ୍ବ","ପଖାଳ","ଛୁଟି","ବୁଲାବୁଲି","ନଦୀ","ପହଁରା","ମଜା","ଖେଳ"], modelLines:["ଗ୍ରୀଷ୍ମ ଛୁଟିରେ ବିଦ୍ୟାଳୟ ବନ୍ଦ ଥାଏ।","ଅତି ଗରମ ହେଉଥିବାରୁ ପଖାଳ ଖାଇବାକୁ ଭଲ ଲାଗେ।","ମୁଁ ମୋ ଗ୍ରାମରେ ବୁଲିବାକୁ ଯାଏ।","ପାଚିଲା ଆମ୍ବର ମହକ।","ସମୟ କଟାଇବାକୁ ଦୋଷ୍ଟମାନଙ୍କ ସହ ଖେଳେ।","ନଦୀରେ ପହଁରିବା ମଜାଦାର।","ସଞ୍ଜବେଳେ ଚାନ୍ଦପୁରୀ ବଜାର ବୁଲେ।","ଘରେ ମାଆ ଥଣ୍ଡା ପାନୀୟ ଦିଅନ୍ତି।","ଛୁଟି ଶେଷରେ ପାଠ ଲେଖା ମଧ୍ୟ କରେ।","ଗ୍ରୀଷ୍ମ ଛୁଟି ସ୍ମୃତିମୟ ହୋଇ ରହେ।"] },
+        { id:7, name:"ମୋ ପ୍ରିୟ ଖେଳ", keywords:["କ୍ରିକେଟ","ବ୍ୟାଟ","ବଲ","ଦଳ","ବିଜୟ","ପଡ଼ିଆ","ରନ","ଉତ୍ସାହ","କ୍ୟାଚ","ଅଭ୍ୟାସ"], modelLines:["ମୋର ପ୍ରିୟ ଖେଳ କ୍ରିକେଟ।","ପ୍ରତିଦିନ ସଞ୍ଜରେ ପଡ଼ିଆରେ ଖେଳେ।","ଆମ ଦଳରେ ୧୧ ଜଣ ସାଙ୍ଗ ଅଛନ୍ତି।","ବ୍ୟାଟର ହୋଇ ରନ କରିବାରେ ମଜା ଆସେ।","ବଲର ଭଲ ସ୍ପିନ ବୋଲିଂ କରେ।","କ୍ୟାଚ ଧରି ବ୍ୟାଟସମ୍ୟାନଙ୍କୁ ଆଉଟ କରାଯାଏ।","ଖେଳ ସମୟରେ ଉତ୍ସାହ ଶୀର୍ଷରେ ଥାଏ।","ଜିତିବା ପରେ ଖୁସିରେ ଚିତ୍କାର କରୁ।","ନିଜ ସ୍ୱାସ୍ଥ୍ୟ ପାଇଁ ଖେଳ ଜରୁରୀ।","କ୍ରିକେଟ୍ ମୋତେ ଟିମ୍ୱର୍କ ଶିଖାଏ।"] },
+        { id:8, name:"ପଶୁ ପକ୍ଷୀ", keywords:["ସିଂହ","ହାତୀ","ମୟୂର","ତୋତା","ବନ","ଜଙ୍ଗଲ","ଡେଣା","ସୌନ୍ଦର୍ଯ୍ୟ","ଗର୍ଜନ","ଚଞ୍ଚଳ"], modelLines:["ପଶୁପକ୍ଷୀ ପ୍ରକୃତିର ସୌନ୍ଦର୍ଯ୍ୟ।","ସିଂହ ଜଙ୍ଗଲର ରାଜା।","ହାତୀ ବଡ଼ ଓ ଶକ୍ତିଶାଳୀ।","ମୟୂର ପଙ୍ଖ ଖୋଲି ନାଚେ।","ତୋତା ମଧୁର ସ୍ୱରରେ କଥା କହି ପାରେ।","ଜଙ୍ଗଲରେ ବିଭିନ୍ନ ପ୍ରାଣୀ ରହନ୍ତି।","ପକ୍ଷୀମାନେ ଆକାଶରେ ଉଡ଼ନ୍ତି।","ପଶୁମାନେ ଆମ ପରି ଅନୁଭବ କରନ୍ତି।","ସେମାନଙ୍କ ସୁରକ୍ଷା ଆମ ଦାୟିତ୍ୱ।","ଏମାନେ ପ୍ରକୃତିର ସନ୍ତୁଳନ ରଖନ୍ତି।"] },
+        { id:9, name:"ପୁସ୍ତକାଳୟ", keywords:["ପୁସ୍ତକ","ଜ୍ଞାନ","ପଢ଼ା","ବହି","ଶାନ୍ତ","ସଦସ୍ୟ","ପଠନ","ଗବେଷଣା","ଲେଖକ","ଆଲୋକ"], modelLines:["ବିଦ୍ୟାଳୟର ପୁସ୍ତକାଳୟ ବହୁତ ବଡ଼।","ସେଠାରେ ହଜାର ହଜାର ବହି ଅଛି।","ସବୁ ବିଷୟର ପୁସ୍ତକ ମିଳେ।","ପୁସ୍ତକାଳୟର ପରିବେଶ ଶାନ୍ତ।","ମୁଁ ପ୍ରତି ସପ୍ତାହରେ ଗୋଟିଏ ଗଳ୍ପ ବହି ପଢ଼େ।","ସେଠାରେ ପଢ଼ିବା ପାଇଁ ଅନେକ ଛାତ୍ର ଆସନ୍ତି।","ଜ୍ଞାନ ବୃଦ୍ଧି ପାଇଁ ପୁସ୍ତକ ସର୍ବୋତ୍ତମ ସାଥୀ।","ପୁସ୍ତକାଳୟର ପ୍ରବନ୍ଧକ ବହୁତ ସାହାଯ୍ୟ କରନ୍ତି।","ସେଠି ଦୀର୍ଘ ସମୟ ରହି ପଢ଼ି ହୁଏ।","ପୁସ୍ତକ ପ୍ରକୃତ ବନ୍ଧୁ।"] },
+        { id:10, name:"ଆମ ଗ୍ରାମ", keywords:["ଗାଁ","ଚାଷ","କୃଷକ","ପୋଖରୀ","ଗୋପାଳ","ମନ୍ଦିର","ମେଳା","ସହଯୋଗ","ସରଳ","ପ୍ରକୃତି"], modelLines:["ମୋ ଗାଁ ଏକ ଶାନ୍ତ ସୁନ୍ଦର ଗ୍ରାମ।","ଲୋକେ ଚାଷବାସ କରନ୍ତି।","ଗାଁ ପାଖରେ ପୋଖରୀ ଓ ବଡ଼ ବରଗଛ।","ପ୍ରତିବର୍ଷ ରଥଯାତ୍ରାରେ ମେଳା ଲାଗେ।","ଗୋପାଳମାନେ ଗାଈ ଚରାନ୍ତି।","ଗ୍ରାମର ମନ୍ଦିରଟି ବହୁତ ପୁରୁଣା।","ସମସ୍ତେ ପରସ୍ପରକୁ ସାହାଯ୍ୟ କରନ୍ତି।","ସରଳ ଓ ମିଷ୍ଟ ଭାଷା କହନ୍ତି।","ଗାଁ ପ୍ରକୃତି ନିକଟରେ ରହେ।","ଆମ ଗାଁ ମୋର ଅଭିମାନ।"] },
+        { id:11, name:"ସ୍ୱାସ୍ଥ୍ୟ", keywords:["ଯତ୍ନ","ବ୍ୟାୟାମ","ସବୁଜ","ଔଷଧ","ଡାକ୍ତର","ପରିଷ୍କାର","ପାଣି","ଘାସ","ନିଦ","ସୁରକ୍ଷା"], modelLines:["ସୁସ୍ଥ ଶରୀର ପାଇଁ ନିୟମିତ ବ୍ୟାୟାମ ଦରକାର।","ସବୁଜ ପନିପରିବା ଖାଇବା ଉପଯୁକ୍ତ।","ପରିଷ୍କାର ପରିଚ୍ଛନ୍ନତା ରକ୍ଷା କରିବା।","ପ୍ରତିଦିନ ୮ ଘଣ୍ଟା ଶୋଇବା ଜରୁରୀ।","ଅସୁସ୍ଥ ହେଲେ ଡାକ୍ତର ଦେଖାଇବା।","ଘାସବୁଜା ଖେଳ ଶରୀରକୁ ଚଞ୍ଚଳ କରେ।","ପର୍ଯ୍ୟାପ୍ତ ପାଣି ପିଇବା ସ୍ୱାସ୍ଥ୍ୟ ସହାୟକ।","ଧୂମପାନ, ମଦ୍ୟପାନ ଠାରୁ ଦୂରେଇ ରହିବା।","ମାନସିକ ସ୍ୱାସ୍ଥ୍ୟ ପାଇଁ ହସଖୁସି ରହିବା।","ସୁସ୍ଥ ଥିଲେ ଭଲ ପାଠ ପଢ଼ି ହୁଏ।"] },
+        { id:12, name:"ମୋ ସହର", keywords:["ସହର","ବସ","ଟ୍ରେନ","ବଡ଼ ଦୋକାନ","କଲେଜ","ପାର୍କ","ଲୋକ","ଯାନ","ପ୍ରଦୂଷଣ","ଅଫିସ"], modelLines:["ଭୁବନେଶ୍ୱର ମୋ ସହର।","ଏଠାରେ ବଡ଼ ବଡ଼ ରାସ୍ତା ଓ ବଜାର।","ପ୍ରତିଦିନ ବସ, କାର ଦୌଡ଼େ।","ସହରରେ ଅନେକ ପାର୍କ ଓ ମନ୍ଦିର ଅଛି।","ଏଠାରେ ଲୋକେ ଶୀଘ୍ର ଚାଲନ୍ତି।","ଶିକ୍ଷା ଓ ଚାକିରି ପାଇଁ ଭଲ।","ରାତିରେ ବିଦ୍ୟୁତ୍ ଆଲୋକରେ ସହର ଝଲସେ।","ମୋ ସହର ଆଧୁନିକ କିନ୍ତୁ ପ୍ରଦୂଷଣ ବଢ଼ିଛି।","ଏଠାରେ ମନୋରଞ୍ଜନର ସୁବିଧା ଅଛି।","ମୁଁ ମୋ ସହରକୁ ଭଲ ପାଏ।"] },
+        { id:13, name:"ହୋଲି", keywords:["ରଙ୍ଗ","ଅବିର","ଫଗୁଣ","ମହୋତ୍ସବ","ପିଚକାରୀ","ଗୀତ","ନାଚ","ମିଠା","ପାଣି","ମିତ୍ର"], modelLines:["ହୋଲି ରଙ୍ଗର ପର୍ବ।","ଫଗୁଣ ମାସରେ ଏହା ପାଳନ ହୁଏ।","ସମସ୍ତେ ପରସ୍ପରକୁ ରଙ୍ଗ ଲଗାନ୍ତି।","ପିଲାମାନେ ପିଚକାରୀରେ ପାଣି ଛିଞ୍ଚନ୍ତି।","ଢୋଲ ବାଜାର ଶବ୍ଦରେ ମହୋଲ ଗରମ।","ଲୋକେ ରଙ୍ଗୀନ ହୋଇ ନାଚନ୍ତି।","ଗୁଜିଆ ଓ ମିଠା ଖାଇ ମଜା ହୁଏ।","ଏହି ଦିନ କଥା ଭୁଲି ମିଶିଯାଏ।","ବୈର ଭାବ ଦୂର ହୋଇ ସ୍ନେହ ବଢ଼େ।","ହୋଲି ସମତା ଓ ଆନନ୍ଦର ସନ୍ଦେଶ ଦିଏ।"] },
+        { id:14, name:"ନଦୀ", keywords:["ଜଳ","ମତ୍ସ୍ୟ","ପୋତ","ନୌକା","କୂଳ","ବାଲି","ସେତୁ","ସ୍ରୋତ","ସ୍ନାନ","ମହାନଦୀ"], modelLines:["ନଦୀ ପ୍ରକୃତିର ଅମୃତ।","ଏହା ସବୁଜିମା ଦିଏ।","ନଦୀର କୂଳ ମନୋରମ।","ମତ୍ସ୍ୟମାନେ ପାଣିରେ ପହଁରନ୍ତି।","ସକାଳେ ଲୋକେ ଗାଧୋଇବାକୁ ଆସନ୍ତି।","ନଦୀରେ ଡଙ୍ଗା ବିହାର ମଜା।","ବର୍ଷା ଦିନେ ନଦୀ ଉଛୁଳି ପଡ଼େ।","ଏହା ଚାଷ ପାଇଁ ପାଣି ଯୋଗାଏ।","ମହାନଦୀ ଓଡ଼ିଶାର ଜୀବନରେଖା।","ନଦୀ ଦେଖିବାକୁ ବହୁତ ସୁନ୍ଦର।"] },
+        { id:15, name:"ପାହାଡ଼", keywords:["ଶିଖର","ଶୀତଳ","ବନ","ଝରଣା","ଗୁମ୍ଫା","ମେଘ","ପର୍ଯ୍ୟଟନ","ସୂର୍ଯ୍ୟୋଦୟ","ପଥର","ହରିତ"], modelLines:["ପାହାଡ଼ ଗର୍ବରେ ଆକାଶକୁ ଛୁଏଁ।","ଶୀତଳ ବାୟୁ ପ୍ରାଣ ଶକ୍ତି ଦିଏ।","ଝରଣା ଝରି ସଙ୍ଗୀତ ସୃଷ୍ଟି କରେ।","ଘନ ଜଙ୍ଗଲରେ ବିଭିନ୍ନ ପ୍ରାଣୀ ରହନ୍ତି।","ପାହାଡ଼ ଶିଖରରୁ ଦୃଶ୍ୟ ଅଦ୍ଭୁତ।","ସୂର୍ଯ୍ୟୋଦୟ ବେଳେ ସୌନ୍ଦର୍ଯ୍ୟ ବଢ଼ିଯାଏ।","ଗୁମ୍ଫା ଓ ପୁରୁଣା ଅବଶେଷ ଆକର୍ଷଣ।","ପାହାଡ଼ ଉପରେ ମେଘ ବୁଲିବା ଦୃଶ୍ୟ ମନୋହର।","ପର୍ଯ୍ୟଟକ ବହୁତ ଆସନ୍ତି।","ପାହାଡ଼ ପ୍ରକୃତିର ବରଦାନ।"] },
+        { id:16, name:"ମୋ ବନ୍ଧୁ", keywords:["ସାଙ୍ଗ","ବିଶ୍ୱାସ","ସାହାଯ୍ୟ","ହସ","ଖେଳ","ପାଠ","ସମୟ","ଯତ୍ନ","ମିଠା","ଶୁଭେଚ୍ଛା"], modelLines:["ମୋର ସର୍ବୋତ୍ତମ ବନ୍ଧୁ ରାହୁଲ।","ସେ ସବୁବେଳେ ମୋର ସାହାଯ୍ୟ କରେ।","ବିଦ୍ୟାଳୟରେ ଏକାଠି ପାଠ ପଢ଼ୁ।","ସଂଜବେଳେ ମିଶି ଖେଳେ।","ସେ ବହୁତ ହସୁଆ ଓ ଭଲ।","ଦୁଃଖ ସମୟରେ ପାଖରେ ଠିଆ ହୁଏ।","ତାର ପାଠପଢ଼ା ମଧ୍ୟ ଭଲ।","ଆମ ମଧ୍ୟରେ କୌଣସି ରହସ୍ୟ ନାହିଁ।","ବନ୍ଧୁ ମଣିଷ ଜୀବନରେ ଆନନ୍ଦ ଭରେ।","ସେ ମୋ ଭାଇ ପରି।"] },
+        { id:17, name:"ଖେଳଣା ଦୋକାନ", keywords:["ଖେଳଣା","ଗୁଡ଼ି","ବଲ","କାର","ପୁପି","ଘରଘରି","ପପୁଆ","ଲୁଡୁ","ମୂଲ୍ୟ","ପିଲା"], modelLines:["ବଜାରରେ ଏକ ରଙ୍ଗୀନ ଖେଳଣା ଦୋକାନ ଅଛି।","ସେଥିରେ ଗୁଡ଼ି, ବଲ, ପୁପି ଥାଏ।","ପିଲାମାନେ ସେଠି ଟହଲ ହୁଅନ୍ତି।","ମୋ ପ୍ରିୟ ଖେଳନା ହେଲା ଟେଡି ବେୟାର।","ଦୋକାନୀ ମାମୁଁ ଭଲରେ ଦେଖାନ୍ତି।","ପୂଜାରେ ନୂଆ ଖେଳନା କିଣିବାର ଧୁମ।","କିଛି ଖେଳଣା ବ୍ୟାଟେରୀରେ ଚଳେ।","ଦୋକାନରେ ରଙ୍ଗ ବିରଙ୍ଗର ବସ୍ତୁ।","ଖେଳଣା ପିଲାଙ୍କ ମନ ତୋଷେ।","ମୁଁ ବର୍ଷକୁ ଥରେ ସେଠୁ କିଣେ।"] },
+        { id:18, name:"ମୋ କୋଠରୀ", keywords:["ଖାଟ","ମେଜ","ଚେୟାର","ପୁସ୍ତକ","ପୋଷ୍ଟର","ଆଲୋକ","ପରଦା","ଦେବାଲ","ଶୋଇବା","ପଢ଼ା"], modelLines:["ମୋ କୋଠରୀ ଛୋଟ କିନ୍ତୁ ସୁଘର।","ଏଠାରେ ମୋର ପାଠ ମେଜ ଅଛି।","କାନ୍ଥରେ ସୁନ୍ଦର ପୋଷ୍ଟର ଲଗାଯାଇଛି।","ଶୋଇବା ପାଇଁ ନରମ ଖାଟ।","ପୁସ୍ତକାଳୟରୁ ଗଳ୍ପ ବହି ସାଇତି ରଖିଛି।","ସନ୍ଧ୍ୟାରେ ପାଇଲଟ୍ ଜାଳି ପଢ଼େ।","ଝରକାରେ ନୀଳ ପରଦା।","କୋଠରୀ ସଫା ରଖିବା ମୋ ଅଭ୍ୟାସ।","ଏଠାରେ ମୁଁ ନିଜକୁ ସ୍ୱାଧୀନ ଅନୁଭବ କରେ।","ମୋ କୋଠରୀ ମୋର ନିଜସ୍ୱ ଦୁନିଆ।"] },
+        { id:19, name:"ପକ୍ଷୀ ବିହାର", keywords:["ଚଢ଼େଇ","ଶାଳିକ","ବସନ୍ତ","ଘୋଷା","ଅଣ୍ଡା","ବସା","ପାଣି","ଶବ୍ଦ","ଚଞ୍ଚଳ","ଉଡ଼ାଜାହାଜ"], modelLines:["ପକ୍ଷୀମାନେ ଆକାଶର ସୁନ୍ଦର ଜୀବ।","ସକାଳୁ ସକାଳୁ ସେମାନଙ୍କ କୁଜୁକୁଜୁ।","ଶାଳିକ ଓ ଘୋଷା ସବୁଜ ବୃକ୍ଷରେ ବସା ବାନ୍ଧନ୍ତି।","ପକ୍ଷୀ ବିହାର ଦେଖିବାକୁ ହୃଦୟଗ୍ରାହୀ।","ସେମାନେ କୀଟପତଙ୍ଗ ଖାଇ ପରିବେଶ ସଫା କରନ୍ତି।","ଅଣ୍ଡାରୁ ପିଲା ବାହାରେ।","ବସନ୍ତରେ ଅନେକ ପକ୍ଷୀ ଆସନ୍ତି।","ପକ୍ଷୀମାନେ ଏକାଠି ଉଡ଼ିଲେ ସୁନ୍ଦର ଦୃଶ୍ୟ।","ପକ୍ଷୀଙ୍କୁ ଦାନା ଦେବା ଭଲ କାମ।","ଆମେ ସେମାନଙ୍କ ବସା ନଷ୍ଟ କରିବା ଉଚିତ ନୁହେଁ।"] },
+        { id:20, name:"ଶୀତ ଋତୁ", keywords:["କୁହୁଡ଼ି","ଶୀତ","ନିହାର","ପିସ୍ତା","ପହଣ୍ଡି","ଲୁଗା","ଅଗ୍ନି","ପିଠା","ସକାଳ","ଉତ୍ସ"], modelLines:["ପୌଷ ମାସରେ ଶୀତ ଋତୁ ଆସେ।","ସକାଳେ କୁହୁଡ଼ି ଯୋଗୁଁ ଦୂରତା ଦିଶେନା।","ଘରେ ଅଗ୍ନି ତାପି ବସିବାର ମଜା।","ପହଣ୍ଡି ଓ ମୂଳା ପିଠା ଖାଇବାକୁ ଖୁବ୍ ଭଲ।","ସମସ୍ତେ ମୋଟା ଲୁଗା ପିନ୍ଧନ୍ତି।","ନିହାର ହେତୁ ଘାସ ଉପରେ ବରଫ ଜମେ।","ଶୀତ ସବୁଜ ସବ୍ଜୀ ପାଇଁ ଭଲ।","ଶୀତକୁ କୁହାଯାଏ 'ସ୍ୱାସ୍ଥ୍ୟ ଋତୁ'।","ସୂର୍ଯ୍ୟ ପଡ଼ିଲେ କମ୍ପ ହୁଏ।","ଶୀତରେ ଟଭା ଜଳ ଗାଧୋଇବା କଷ୍ଟକର।"] },
+        { id:21, name:"ସପନ", keywords:["ସ୍ୱପ୍ନ","ଇଚ୍ଛା","ଆକାଶ","ତାରା","ଉଡ଼ାଜାହାଜ","ବୃତ୍ତି","ପାଇଲଟ","ଶିକ୍ଷକ","ଡାକ୍ତର","ଆଶା"], modelLines:["ପ୍ରତ୍ୟେକ ପିଲାର ବଡ଼ ସ୍ୱପ୍ନ ଥାଏ।","ମୋ ସ୍ୱପ୍ନ ଡାକ୍ତର ହେବାର।","ମୁଁ ଗରିବ ରୋଗୀର ସେବା କରିବି।","ସ୍ୱପ୍ନ ପୂରଣ ପାଇଁ ପରିଶ୍ରମ ଦରକାର।","ସ୍ୱପ୍ନର ସିଢ଼ି ଉପରକୁ ଚଢ଼ିବା।","କେତେକ ସ୍ୱପ୍ନ ବହୁତ ବଡ଼, ହାରିବା ନାହିଁ।","ସ୍ୱପ୍ନ ଦେଖିବା ଜରୁରୀ, ସେ ଦିଗ ଦେଖାଏ।","ଯଦି ସ୍ୱପ୍ନ ନଥାନ୍ତା, ଜୀବନ ନିରସ।","ମୋର ବନ୍ଧୁମାନେ ପାଇଲଟ୍ ହେବାକୁ ଚାହାନ୍ତି।","ସ୍ୱପ୍ନପୂର୍ତ୍ତି ପାଇଁ ପାଠରେ ମନୋଯୋଗ ଦେବି।"] },
+        { id:22, name:"ବୃକ୍ଷର ଗୁରୁତ୍ୱ", keywords:["ଗଛ","ଅମ୍ଳଜାନ","ଛାଇ","ଫଳ","ଜୀବନ","ସବୁଜ","ପରିବେଶ","ପବନ","ଜଳ","ଧରାତ୍ରୀ"], modelLines:["ଗଛ ଆମର ପ୍ରାଣବନ୍ଧୁ।","ସେ ଅମ୍ଳଜାନ ଦିଏ, କାର୍ବନ ଡାଇଅକ୍ସାଇଡ ନିଏ।","ତା' ଛାଇରେ ଆମେ ବିଶ୍ରାମ ନେଉ।","ଫଳ,ଫୁଲ,ଔଷଧ ଦିଏ।","ଗଛ ରହିଲେ ପରିବେଶ ସୁନ୍ଦର ଥାଏ।","ବୃକ୍ଷ ମାଟି ଧରିଧରେ, ବନ୍ୟା ରୋକେ।","ପବନ ଶୁଦ୍ଧ କରେ।","ଗୋଟିଏ ଗଛ ଶହେ ବର୍ଷ ବଞ୍ଚେ।","ବୃକ୍ଷ କାଟିଲେ ଜୀବନ ସଙ୍କଟ।","ଅଧିକରୁ ଅଧିକ ଗଛ ଲଗାଇବା କର୍ତ୍ତବ୍ୟ।"] },
+        { id:23, name:"କମ୍ପ୍ୟୁଟର", keywords:["ଯନ୍ତ୍ର","ଅନଲାଇନ","ଜ୍ଞାନ","ଗେମ୍","ମାଉସ","କୀବୋର୍ଡ","ପଢ଼ା","ସଫ୍ଟୱେର","ଭିଡିଓ","ସ୍କ୍ରିନ"], modelLines:["କମ୍ପ୍ୟୁଟର ଏକ ଅତ୍ୟାଧୁନିକ ଯନ୍ତ୍ର।","ଏହା ଗଣନା, ଲେଖା, ପଢ଼ାରେ ସାହାଯ୍ୟ କରେ।","ଅନଲାଇନ ଶ୍ରେଣୀ ନେବାକୁ ସୁବିଧା।","ମୁଁ ଗଣିତ ସମାଧାନ ପାଇଁ ବ୍ୟବହାର କରେ।","କମ୍ପ୍ୟୁଟର ଯୋଗେ ଦୁନିଆର ଖବର ପାଏ।","ଗେମ୍ ଖେଳି ସମୟ କଟାଇ ହୁଏ।","ଅଧିକ ବ୍ୟବହାର ଆଖି ପାଇଁ କ୍ଷତିକାରକ।","ସାଇବର ସୁରକ୍ଷା ମନେ ରଖିବା ଦରକାର।","ପ୍ରୋଗ୍ରାମିଂ ଶିଖି ନୂଆ ଜିନିଷ ତିଆରି କରାଯାଏ।","କମ୍ପ୍ୟୁଟର ଭବିଷ୍ୟତର କୁଞ୍ଜି।"] },
+        { id:24, name:"ପର୍ଯ୍ୟଟନ", keywords:["ଭ୍ରମଣ","ସ୍ଥାନ","ପୁରୀ","କୋଣାର୍କ","ଚିଲିକା","ମନୋରଞ୍ଜନ","ଫଟୋ","ସାଙ୍ଗ","ବସ","ଟିକେଟ"], modelLines:["ପର୍ଯ୍ୟଟନ ମନକୁ ଆନନ୍ଦ ଦିଏ।","ମୁଁ ପୁରୀ ଜଗନ୍ନାଥ ମନ୍ଦିର ଦେଖିଛି।","କୋଣାର୍କ ସୂର୍ଯ୍ୟ ମନ୍ଦିର ଶିଳ୍ପକଳା ପ୍ରସିଦ୍ଧ।","ଚିଲିକା ହ୍ରଦରେ ଡଙ୍ଗା ବିହାର କଲି।","ପର୍ଯ୍ୟଟନ ସ୍ଥାନରେ ନୂଆ ଲୋକଙ୍କ ସହ ପରିଚୟ।","ପ୍ରକୃତି ଓ ଐତିହ୍ୟ ଦେଖିବାର ସୁଯୋଗ।","ଘରୁ ବାହାରି ଆସିବାକୁ ବହୁତ ଭଲ ଲାଗେ।","ସାଙ୍ଗମାନଙ୍କ ସହ ଫଟୋ ଉଠାଇବା।","ଶୈକ୍ଷିକ ଭ୍ରମଣ ଜ୍ଞାନ ବଢ଼ାଏ।","ପର୍ଯ୍ୟଟନ ଦ୍ୱାରା ସ୍ଥାନୀୟ ସଂସ୍କୃତି ଜାଣିବା।"] }
+    ];
+
+    // ---------- GLOBALS ----------
+    let mediaStream = null;
+    let currentTopicIndex = 0;
+    let recordings = []; // { blobUrl, recorded, recorder, chunks, isRecording } per keyword
+    let activeRecorderIndex = null;
+    let currentMediaRecorder = null;
+
+    const topicSelect = document.getElementById("topicSelect");
+    const keywordsContainer = document.getElementById("keywordsContainer");
+    const recordedCountSpan = document.getElementById("recordedCount");
+    const totalKeywordsSpan = document.getElementById("totalKeywords");
+    const showMeBtn = document.getElementById("showMeBtn");
+    const modelDisplayArea = document.getElementById("modelDisplayArea");
+    const modelLinesList = document.getElementById("modelLinesList");
+
+    totalKeywordsSpan.innerText = "10";
+
+    // Request microphone permission once
+    async function initMicrophone() {
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            mediaStream = stream;
+            console.log("Microphone access granted");
+            return true;
+        } catch (err) {
+            console.error("Microphone error:", err);
+            const warnDiv = document.createElement("div");
+            warnDiv.className = "permission-warning";
+            warnDiv.innerText = "⚠️ ମାଇକ୍ ଆବଶ୍ୟକ! ଅନୁଗ୍ରହ କରି ପରବର୍ତ୍ତୀ ରେକର୍ଡିଂ ପାଇଁ ଅନୁମତି ଦିଅନ୍ତୁ।";
+            keywordsContainer.prepend(warnDiv);
+            return false;
+        }
+    }
+
+    // load topic data
+    function loadTopic(index) {
+        const topic = topicsData[index];
+        if (!topic) return;
+        // clear recordings memory
+        clearAllRecordingURLs();
+        recordings = new Array(10).fill(null).map(() => ({ blobUrl: null, recorded: false, recorder: null, chunks: [], isRecording: false }));
+        renderKeywords(topic);
+        updateProgress();
+        // Hide model display when topic changes
+        modelDisplayArea.style.display = "none";
+        // if any active recorder stop
+        if (currentMediaRecorder && activeRecorderIndex !== null) {
+            try { currentMediaRecorder.stop(); } catch(e) {}
+            currentMediaRecorder = null;
+            activeRecorderIndex = null;
+        }
+    }
+
+    function clearAllRecordingURLs() {
+        if (recordings) {
+            recordings.forEach(rec => {
+                if (rec.blobUrl) URL.revokeObjectURL(rec.blobUrl);
+            });
+        }
+    }
+
+    function updateProgress() {
+        const completed = recordings.filter(r => r.recorded === true).length;
+        recordedCountSpan.innerText = completed;
+    }
+
+    function renderKeywords(topic) {
+        keywordsContainer.innerHTML = "";
+        topic.keywords.forEach((kw, idx) => {
+            const card = document.createElement("div");
+            card.className = "keyword-card";
+            const recordStatus = recordings[idx]?.recorded || false;
+            card.innerHTML = `
+                <div class="keyword-info">
+                    <div class="keyword-number">${idx+1}</div>
+                    <span class="keyword-label">${kw}</span>
+                    <span class="status-dot ${recordStatus ? 'recorded' : ''}" id="statusDot_${idx}"></span>
+                </div>
+                <div class="audio-actions" id="actions_${idx}">
+                    <button class="btn-icon btn-record" data-idx="${idx}" id="recordBtn_${idx}">🎙️ ରେକର୍ଡ</button>
+                    <button class="btn-icon btn-stop" data-idx="${idx}" id="stopBtn_${idx}" style="display:${recordings[idx]?.isRecording ? 'inline-flex' : 'none'}">⏹️ ବନ୍ଦ</button>
+                    <button class="btn-icon btn-play" data-idx="${idx}" id="playBtn_${idx}" ${!recordStatus ? 'disabled' : ''}>🔊 ଶୁଣ</button>
+                </div>
+            `;
+            keywordsContainer.appendChild(card);
+        });
+
+        // attach events after render
+        for (let i = 0; i < topic.keywords.length; i++) {
+            const recordBtn = document.getElementById(`recordBtn_${i}`);
+            const stopBtn = document.getElementById(`stopBtn_${i}`);
+            const playBtn = document.getElementById(`playBtn_${i}`);
+            if (recordBtn) recordBtn.addEventListener("click", () => startRecording(i));
+            if (stopBtn) stopBtn.addEventListener("click", () => stopRecording(i));
+            if (playBtn) playBtn.addEventListener("click", () => playRecording(i));
+        }
+    }
+
+    async function startRecording(idx) {
+        if (!mediaStream) {
+            const ok = await initMicrophone();
+            if (!ok) { alert("ମାଇକ୍ରୋଫୋନ୍ ଅନୁମତି ଦିଅନ୍ତୁ"); return; }
+        }
+        if (recordings[idx].isRecording) return;
+        // Stop any ongoing recording on different index
+        if (currentMediaRecorder && activeRecorderIndex !== null && activeRecorderIndex !== idx) {
+            try { currentMediaRecorder.stop(); } catch(e) {}
+            updateStopUI(activeRecorderIndex);
+        }
+        const chunks = [];
+        const recorder = new MediaRecorder(mediaStream);
+        recorder.ondataavailable = (e) => {
+            if (e.data.size > 0) chunks.push(e.data);
+        };
+        recorder.onstop = () => {
+            const blob = new Blob(chunks, { type: 'audio/webm' });
+            const url = URL.createObjectURL(blob);
+            // revoke old url
+            if (recordings[idx].blobUrl) URL.revokeObjectURL(recordings[idx].blobUrl);
+            recordings[idx].blobUrl = url;
+            recordings[idx].recorded = true;
+            recordings[idx].chunks = [];
+            recordings[idx].isRecording = false;
+            updateProgress();
+            // update UI
+            const statusDot = document.getElementById(`statusDot_${idx}`);
+            if (statusDot) statusDot.classList.add("recorded");
+            const playBtn = document.getElementById(`playBtn_${idx}`);
+            if (playBtn) { playBtn.disabled = false; }
+            const stopBtn = document.getElementById(`stopBtn_${idx}`);
+            if (stopBtn) stopBtn.style.display = "none";
+            const recordBtn = document.getElementById(`recordBtn_${idx}`);
+            if (recordBtn) recordBtn.style.display = "inline-flex";
+            if (activeRecorderIndex === idx) activeRecorderIndex = null;
+            currentMediaRecorder = null;
+        };
+        recorder.start();
+        recordings[idx].recorder = recorder;
+        recordings[idx].chunks = chunks;
+        recordings[idx].isRecording = true;
+        currentMediaRecorder = recorder;
+        activeRecorderIndex = idx;
+        // UI updates
+        const stopBtn = document.getElementById(`stopBtn_${idx}`);
+        if (stopBtn) stopBtn.style.display = "inline-flex";
+        const recordBtn = document.getElementById(`recordBtn_${idx}`);
+        if (recordBtn) recordBtn.style.display = "none";
+        // add visual recording effect
+        recordBtn?.classList.add("recording-active");
+    }
+
+    function stopRecording(idx) {
+        if (recordings[idx].isRecording && recordings[idx].recorder && recordings[idx].recorder.state === "recording") {
+            recordings[idx].recorder.stop();
+        }
+    }
+
+    function updateStopUI(idx) {
+        const stopBtn = document.getElementById(`stopBtn_${idx}`);
+        if (stopBtn) stopBtn.style.display = "none";
+        const recordBtn = document.getElementById(`recordBtn_${idx}`);
+        if (recordBtn) { recordBtn.style.display = "inline-flex"; recordBtn.classList.remove("recording-active"); }
+        if (recordings[idx]) recordings[idx].isRecording = false;
+    }
+
+    function playRecording(idx) {
+        if (recordings[idx].recorded && recordings[idx].blobUrl) {
+            const audio = new Audio(recordings[idx].blobUrl);
+            audio.play().catch(e => console.warn("play err", e));
+        } else {
+            alert("ପ୍ରଥମେ ରେକର୍ଡ କରନ୍ତୁ!");
+        }
+    }
+
+    function showModelLines() {
+        const topic = topicsData[currentTopicIndex];
+        if (!topic) return;
+        modelLinesList.innerHTML = "";
+        topic.modelLines.forEach(line => {
+            const li = document.createElement("li");
+            li.textContent = line;
+            modelLinesList.appendChild(li);
+        });
+        modelDisplayArea.style.display = "block";
+        // scroll smoothly
+        modelDisplayArea.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+
+    // Populate topics dropdown
+    function populateTopics() {
+        topicsData.forEach((topic, idx) => {
+            const option = document.createElement("option");
+            option.value = idx;
+            option.textContent = `${idx+1}. ${topic.name}`;
+            topicSelect.appendChild(option);
+        });
+        topicSelect.value = "0";
+        currentTopicIndex = 0;
+        loadTopic(0);
+    }
+
+    topicSelect.addEventListener("change", (e) => {
+        const newIdx = parseInt(e.target.value);
+        if (!isNaN(newIdx) && newIdx !== currentTopicIndex) {
+            currentTopicIndex = newIdx;
+            loadTopic(newIdx);
+        }
+    });
+
+    showMeBtn.addEventListener("click", showModelLines);
+
+    // start app
+    initMicrophone().then(() => {
+        populateTopics();
+    }).catch(() => {
+        populateTopics(); // still populate, but recording will warn
+    });
+</script>
+</body>
+</html>
